@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card" style="max-width: 640px; text-align:left;">
+
+        <h1 class="auth-title">{{ title }}</h1>
+        <p class="auth-subtitle">Заповніть форму нижче</p>
+
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                {{ form.title.label(class="form-label") }}
+                {{ form.title(class="form-input") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.short_description.label(class="form-label") }}
+                {{ form.short_description(class="form-input") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.image_url.label(class="form-label") }}
+                {{ form.image_url(class="form-input") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.description.label(class="form-label") }}
+                {{ form.description(class="form-input") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.ingredients.label(class="form-label") }}
+                {{ form.ingredients(class="form-input") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.steps.label(class="form-label") }}
+                {{ form.steps(class="form-input") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.cooking_time.label(class="form-label") }}
+                {{ form.cooking_time(class="form-input") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.category_id.label(class="form-label") }}
+                {{ form.category_id(class="form-input") }}
+            </div>
+
+            <button type="submit" class="btn-auth-submit">
+                {{ form.submit.label.text }}
+            </button>
+
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}{{ recipe.title }}{% endblock %}
+
+{% block content %}
+<div class="recipe-detail-container">
+
+    <!-- Фото рецепта -->
+    {% if recipe.image_url %}
+    <div style="text-align:center; margin-bottom: 32px;">
+        <img src="{{ recipe.image_url }}" 
+             alt="{{ recipe.title }}" 
+             style="width: 100%; max-width: 600px; border-radius: 14px;">
+    </div>
+    {% endif %}
+
+    <!-- Заголовок -->
+    <div class="recipe-header">
+        <h1 class="recipe-title">{{ recipe.title }}</h1>
+
+        {% if recipe.short_description %}
+        <p style="font-size:1.1rem; color:var(--muted); max-width: 600px; margin: 0 auto 20px;">
+            {{ recipe.short_description }}
+        </p>
+        {% endif %}
+
+        <p class="recipe-meta">
+            <span>{{ recipe.created_at.strftime('%d.%m.%Y') }}</span>
+            {% if recipe.category %}
+                <span class="recipe-category">{{ recipe.category.name }}</span>
+            {% endif %}
+            {% if recipe.cooking_time %}
+                <span>{{ recipe.cooking_time }} хв</span>
+            {% endif %}
+        </p>
+    </div>
+
+    <!-- Опис -->
+    {% if recipe.description %}
+    <div class="recipe-section">
+        <h3 class="section-title">Опис</h3>
+        <div class="recipe-pre">{{ recipe.description }}</div>
+    </div>
+    {% endif %}
+
+    <!-- Інгредієнти -->
+    {% if recipe.ingredients %}
+    <div class="recipe-section">
+        <h3 class="section-title">Інгредієнти</h3>
+        <div class="recipe-pre">{{ recipe.ingredients }}</div>
+    </div>
+    {% endif %}
+
+    <!-- Кроки -->
+    {% if recipe.steps %}
+    <div class="recipe-section">
+        <h3 class="section-title">Кроки приготування</h3>
+        <div class="recipe-pre">{{ recipe.steps }}</div>
+    </div>
+    {% endif %}
+
+    <!-- Дії -->
+    <div class="recipe-actions">
+        {% if current_user.is_authenticated and recipe.user_id == current_user.id %}
+            <a class="btn btn-primary" href="{{ url_for('recipes.edit_recipe', recipe_id=recipe.id) }}">Редагувати</a>
+            <a class="btn btn-outline" href="{{ url_for('recipes.delete_recipe', recipe_id=recipe.id) }}">Видалити</a>
+        {% endif %}
+        <a class="btn btn-outline" href="{{ url_for('recipes.list_recipes') }}">Назад</a>
+    </div>
+
+</div>
+{% endblock %}

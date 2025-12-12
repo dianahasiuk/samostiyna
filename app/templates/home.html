@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Головна{% endblock %}
+
+{% block content %}
+<div class="hero-container">
+    <div class="hero-content">
+        <h1 class="hero-title">Кулінарна книга</h1>
+        <p class="hero-subtitle">
+            Зберігайте улюблені рецепти,<br>діліться смаком з близькими
+        </p>
+
+        <div class="hero-actions">
+            <a href="{{ url_for('recipes.list_recipes') }}" class="btn-hero-primary">
+                Переглянути рецепти
+            </a>
+
+            {% if not current_user.is_authenticated %}
+            <a href="{{ url_for('auth.login') }}" class="btn-hero-secondary">
+                Увійти
+            </a>
+            {% else %}
+            <a href="{{ url_for('recipes.create_recipe') }}" class="btn-hero-secondary">
+                + Додати рецепт
+            </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="hero-decoration"></div>
+</div>
+{% endblock %}

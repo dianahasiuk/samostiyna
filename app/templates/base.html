@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Кулінарна книга{% endblock %}</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Наші стилі -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+</head>
+
+<body>
+    <header class="site-header">
+    <nav class="nav-container">
+        <a href="{{ url_for('home') }}" class="nav-logo">Книга рецептів</a>
+
+        <div class="nav-links">
+            <a href="{{ url_for('recipes.list_recipes') }}">Рецепти</a>
+
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('recipes.create_recipe') }}">Новий рецепт</a>
+                <a href="{{ url_for('auth.logout') }}" class="nav-btn-logout">Вийти</a>
+            {% else %}
+                <a href="{{ url_for('auth.login') }}" class="nav-btn-login">Увійти</a>
+            {% endif %}
+        </div>
+    </nav>
+</header>
+
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}">
+                        <span>{{ message }}</span>
+                        <button type="button" class="flash-close">&times;</button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <script>
+        document.querySelectorAll('.flash-close').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.parentElement.style.opacity = '0';
+                btn.parentElement.style.transform = 'translateX(100%)';
+                setTimeout(() => btn.parentElement.remove(), 400);
+            });
+        });
+    </script>
+</body>
+</html>
+</html>

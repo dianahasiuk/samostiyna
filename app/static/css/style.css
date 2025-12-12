@@ -1,0 +1,446 @@
+/* ============================================= */
+/* SCANDINAVIAN MINIMALISM UI                    */
+/* Чистий білий, легкі сірі акценти, стриманість */
+/* ============================================= */
+
+:root {
+    --accent: #d9534f;         /* спокійний червоний акцент */
+    --accent-hover: #c4423e;
+
+    --text: #1a1a1a;
+    --muted: #6c6c6c;
+
+    --line: #e6e6e6;
+    --bg: #ffffff;
+    --bg-soft: #f7f7f7;
+
+    --radius: 12px;
+    --transition: 0.25s ease;
+}
+
+/* Глобальна база */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Inter", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    padding: 0 0 60px;
+}
+
+/* Заголовки — ніжні, повітряні */
+h1, h2, h3, h4 {
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+    letter-spacing: -0.4px;
+}
+
+/* =============================== */
+/* FLASH                          */
+/* =============================== */
+.flash-messages {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9999;
+}
+.flash {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    padding: 14px 18px;
+    border-radius: var(--radius);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 0.95rem;
+}
+.flash.success { border-left: 3px solid var(--accent); }
+.flash.error   { border-left: 3px solid #c0392b; }
+.flash.info    { border-left: 3px solid #5dade2; }
+
+.flash-close {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 20px;
+    opacity: 0.4;
+    transition: var(--transition);
+}
+.flash-close:hover {
+    opacity: 1;
+}
+
+/* =============================== */
+/* HERO (Головна сторінка)         */
+/* =============================== */
+
+.hero-container {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px 20px;
+    text-align: center;
+}
+.hero-title {
+    font-size: 3.2rem;
+    margin-bottom: 16px;
+}
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--muted);
+    margin-bottom: 40px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.btn {
+    padding: 12px 32px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+.btn-primary {
+    background: var(--accent);
+    color: white;
+}
+.btn-primary:hover { background: var(--accent-hover); }
+
+.btn-outline {
+    border: 1px solid var(--accent);
+    color: var(--accent);
+}
+.btn-outline:hover {
+    background: var(--accent);
+    color: white;
+}
+
+/* =============================== */
+/* Список рецептів                 */
+/* =============================== */
+
+.container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.search-bar {
+    display: flex;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--bg);
+    margin-bottom: 30px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 14px 18px;
+    border: none;
+    font-size: 1rem;
+    background: transparent;
+}
+.search-input:focus { outline: none; }
+
+.search-select {
+    border-left: 1px solid var(--line);
+    padding: 14px 16px;
+    font-size: 0.95rem;
+    background: transparent;
+}
+
+.search-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 14px 18px;
+    cursor: pointer;
+}
+.search-btn:hover {
+    background: var(--accent-hover);
+}
+
+.recipe-card {
+    text-decoration: none;
+    color: var(--text);
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    transition: color var(--transition);
+}
+.recipe-card:hover {
+    color: var(--accent);
+}
+
+.recipe-title {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+}
+.recipe-date {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+/* =============================== */
+/* Сторінка рецепта                */
+/* =============================== */
+
+.recipe-detail-container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+.recipe-pre {
+    background: var(--bg-soft);
+    padding: 20px;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    white-space: pre-line;
+    border: 1px solid var(--line);
+}
+
+/* =============================== */
+/* Авторизація                     */
+/* =============================== */
+
+.auth-container {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+.auth-card {
+    background: var(--bg);
+    padding: 40px;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    width: 100%;
+    max-width: 360px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: white;
+}
+.form-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.btn-auth-submit {
+    width: 100%;
+    padding: 12px;
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: white;
+    border: none;
+}
+.btn-auth-submit:hover {
+    background: var(--accent-hover);
+}
+/* ------------------------------- */
+/* HEADER — мінімалізм */
+/* ------------------------------- */
+
+.site-header {
+  background: white;
+  border-bottom: 1px solid #eee;
+  padding: 14px 0;
+  margin-bottom: 30px;
+}
+
+.nav-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-family: "Playfair Display", serif;
+  font-size: 1.4rem;
+  letter-spacing: -0.4px;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.nav-links a {
+  margin-left: 22px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+.nav-btn-login,
+.nav-btn-logout {
+  padding: 6px 16px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--accent);
+}
+
+.nav-btn-login:hover,
+.nav-btn-logout:hover {
+  background: var(--accent);
+  color: white !important;
+}
+.page-container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.page-title {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.search-section {
+  margin-bottom: 30px;
+}
+
+.add-recipe-box {
+  margin: 20px 0 30px;
+}
+
+.empty-text {
+  color: var(--muted);
+  margin-top: 40px;
+  text-align: center;
+}
+.recipe-image {
+    width: 100%;
+    max-height: 340px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.recipe-short {
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin-bottom: 20px;
+}
+.recipe-detail {
+    max-width: 720px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.recipe-image img {
+    width: 100%;
+    border-radius: 16px;
+    margin-bottom: 30px;
+}
+
+.recipe-title {
+    font-size: 2.6rem;
+    margin-bottom: 10px;
+}
+
+.recipe-meta {
+    color: var(--muted);
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+}
+
+.recipe-category {
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.recipe-block {
+    margin-bottom: 35px;
+}
+
+.recipe-block h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.recipe-block p {
+    background: #fff;
+    padding: 16px 18px;
+    border-radius: 12px;
+    line-height: 1.6;
+    border: 1px solid #eee;
+}
+
+.recipe-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+.recipe-card {
+    display: flex;
+    gap: 14px;
+    padding: 18px 0;
+    border-bottom: 1px solid #ececec;
+    text-decoration: none;
+    color: inherit;
+    transition: 0.25s ease;
+}
+
+.recipe-card:hover {
+    transform: translateX(6px);
+    opacity: 0.85;
+}
+
+.recipe-thumb {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 10px;
+    background: #f0f0f0;
+}
+
+.recipe-card-content {
+    flex: 1;
+}
+
+.recipe-title {
+    margin: 0 0 4px;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.recipe-short {
+    margin: 2px 0 8px;
+    color: #7a7a7a;
+    font-size: 0.95rem;
+}
+
+.recipe-date {
+    font-size: 0.85rem;
+    color: #999;
+}

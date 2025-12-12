@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Видалити рецепт{% endblock %}
+
+{% block content %}
+<div class="delete-container">
+    <div class="delete-card">
+        <h1 class="delete-title">Видалити рецепт?</h1>
+        
+        <p class="delete-recipe-name">«{{ recipe.title }}»</p>
+        
+        <p class="delete-warning">
+            Ви справді хочете видалити цей рецепт?<br>
+            Цю дію <strong>неможливо</strong> буде скасувати.
+        </p>
+
+        <form method="POST" class="delete-form">
+            <button type="submit" class="btn-delete-confirm">
+                Так, видалити назавжди
+            </button>
+            
+            <a href="{{ url_for('recipes.detail_recipe', recipe_id=recipe.id) }}" 
+               class="btn-cancel-delete">
+                Скасувати
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock %}

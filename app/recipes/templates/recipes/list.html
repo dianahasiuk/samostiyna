@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Усі рецепти{% endblock %}
+
+{% block content %}
+<div class="page-container">
+
+    <h2 class="page-title">Усі рецепти</h2>
+
+    <!-- Пошук + сортування -->
+    <form method="GET" action="{{ url_for('recipes.list_recipes') }}" class="search-section">
+
+        <div class="search-bar">
+            <input type="text"
+                   name="q"
+                   value="{{ request.args.get('q','') }}"
+                   placeholder="Пошук за назвою…"
+                   class="search-input">
+
+            <select name="order" class="search-select">
+                <option value="new" {% if request.args.get('order')=='new' %}selected{% endif %}>Новіші</option>
+                <option value="title" {% if request.args.get('order')=='title' %}selected{% endif %}>За алфавітом</option>
+            </select>
+
+            <button type="submit" class="search-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+            </button>
+        </div>
+
+    </form>
+
+    {% if current_user.is_authenticated %}
+    <div class="add-recipe-box">
+        <a href="{{ url_for('recipes.create_recipe') }}" class="btn-primary">+ Додати рецепт</a>
+    </div>
+    {% endif %}
+
+    {% if recipes %}
+    <div class="recipes-list">
+
+        {% for r in recipes %}
+        <a href="{{ url_for('recipes.detail_recipe', recipe_id=r.id) }}" class="recipe-card">
+
+            <!-- Фото рецепта -->
+            {% if r.image_url %}
+            <img src="{{ r.image_url }}"
+                 alt="{{ r.title }}"
+                 class="recipe-thumb">
+            {% endif %}
+
+            <div class="recipe-card-content">
+                <h3 class="recipe-title">{{ r.title }}</h3>
+
+                {% if r.short_description %}
+                <p class="recipe-short">
+                    {{ r.short_description }}
+                </p>
+                {% endif %}
+
+                <p class="recipe-date">{{ r.created_at.strftime('%d.%m.%Y') }}</p>
+            </div>
+
+        </a>
+        {% endfor %}
+
+    </div>
+    {% else %}
+        <p class="empty-text">Рецептів не знайдено.</p>
+    {% endif %}
+
+</div>
+{% endblock %}

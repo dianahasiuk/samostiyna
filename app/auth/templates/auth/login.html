@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Реєстрація{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+  <div class="auth-card">
+
+    <h2 class="auth-title">Створити акаунт</h2>
+    <p class="auth-subtitle">Це швидко та безкоштовно</p>
+
+    <form method="POST">
+      {{ form.hidden_tag() }}
+
+      <div class="form-group">
+          {{ form.username.label(class="form-label") }}
+          {{ form.username(class="form-input") }}
+          {% for e in form.username.errors %}
+              <div class="form-error">{{ e }}</div>
+          {% endfor %}
+      </div>
+
+      <div class="form-group">
+          {{ form.email.label(class="form-label") }}
+          {{ form.email(class="form-input") }}
+          {% for e in form.email.errors %}
+              <div class="form-error">{{ e }}</div>
+          {% endfor %}
+      </div>
+
+      <div class="form-group">
+          {{ form.password.label(class="form-label") }}
+          {{ form.password(class="form-input") }}
+          {% for e in form.password.errors %}
+              <div class="form-error">{{ e }}</div>
+          {% endfor %}
+      </div>
+
+      <button type="submit" class="btn-auth-submit">Зареєструватися</button>
+    </form>
+
+    <p style="margin-top: 14px;">
+        Уже є акаунт?
+        <a class="auth-link" href="{{ url_for('auth.login') }}">Увійти</a>
+    </p>
+
+  </div>
+</div>
+{% endblock %}
